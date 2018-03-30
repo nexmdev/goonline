@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="1dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/subCategory_rate_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="false"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/subCategory_ratings_textView"
+                android:layout_centerHorizontal="false"
+                android:background="@drawable/left_corner_round"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:paddingTop="5dp"
+                android:text="Rs.  8 / km"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/subCategory_owner_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/subCategory_name_textView"
+                android:layout_alignStart="@+id/subCategory_name_textView"
+                android:layout_below="@+id/subCategory_name_textView"
+                android:text="Gajanan Mahalley (Owner)" />
+
+            <TextView
+                android:id="@+id/subCategory_model_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@null"
+                android:padding="5dp"
+                android:text="2016 Model"
+                android:textColor="#15A8F5" />
+
+            <TextView
+                android:id="@+id/subCategory_name_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@+id/subCategory_item_image"
+                android:text="Indica"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/subCategory_item_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentTop="false"
+                android:layout_alignTop="@id/subCategory_name_textView"
+                android:layout_centerHorizontal="false"
+                android:background="@null"
+                android:cropToPadding="false"
+                android:elevation="0dp"
+                android:paddingLeft="10dp"
+                app:srcCompat="@drawable/democarthree" />
+
+            <TextView
+                android:id="@+id/subCategory_ratings_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/subCategory_owner_textView"
+                android:layout_alignParentBottom="false"
+                android:layout_alignStart="@+id/subCategory_owner_textView"
+                android:layout_below="@+id/subCategory_owner_textView"
+                android:paddingBottom="16dp"
+                android:paddingTop="3dp"
+                android:text="4.2"
+                android:textColor="@color/green"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/subCategory_no_users"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/subCategory_ratings_textView"
+                android:layout_toEndOf="@+id/subCategory_ratingBar"
+                android:paddingBottom="16dp"
+                android:text="(100 users)"
+                android:textColor="@color/green"
+                android:textSize="14sp" />
+
+            <RatingBar
+                android:id="@+id/subCategory_ratingBar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/subCategory_ratings_textView"
+                android:layout_toEndOf="@+id/subCategory_ratings_textView"
+                android:numStars="5"
+                android:paddingBottom="16dp"
+                android:paddingTop="1dp"
+                android:rating="3"
+                android:stepSize="0.1" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

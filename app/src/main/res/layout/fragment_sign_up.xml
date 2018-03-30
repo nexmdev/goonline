@@ -1,0 +1,254 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nexm.ghatanjionline.fragments.SignUpFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:id="@+id/signin_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Sign in"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@drawable/button"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Sign in using Email"
+            android:textAppearance="@style/text_button" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/button_grey"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Sign in using Mobile no."
+            android:textAppearance="@style/text_button" />
+
+        <TextView
+            android:id="@+id/textView46"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A verification sms will" />
+
+        <EditText
+            android:id="@+id/signin_mobile_editText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button_outline"
+            android:ems="10"
+            android:hint="Mobile Number"
+            android:inputType="phone"
+            android:paddingLeft="16dp"
+            android:textColorHint="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/signin_email_editText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/button_outline"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="text"
+            android:paddingLeft="16dp"
+            android:textColorHint="@android:color/darker_gray" />
+
+        <EditText
+            android:id="@+id/signin_password_editText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/button_outline"
+            android:ems="10"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:paddingLeft="16dp"
+            android:textColorHint="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/signin_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@drawable/button"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="Sign in"
+            android:textAppearance="@style/text_button" />
+
+        <TextView
+            android:id="@+id/signin_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="New user ? Sign up here..."
+            android:textColor="@color/green" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/signup_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="25dp">
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Account"
+
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/sign_up_edittext_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_outline"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:paddingLeft="16dp"
+                android:textColorHint="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/sign_up_user_middle_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/button_outline"
+                android:ems="10"
+                android:hint="Father's Name"
+                android:inputType="textPersonName"
+                android:paddingLeft="16dp"
+                android:textColorHint="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/sign_up_user_surname"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/button_outline"
+                android:ems="10"
+                android:hint="Surname"
+                android:inputType="textPersonName"
+                android:paddingLeft="16dp"
+                android:textColorHint="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/sign_up_user_address"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/button_outline"
+                android:ems="10"
+                android:hint="Address"
+                android:inputType="textPostalAddress"
+                android:lines="4"
+                android:paddingLeft="16dp"
+                android:textColorHint="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/sign_up_user_phone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/button_outline"
+                android:ems="10"
+                android:hint="Mobile Number"
+                android:inputType="phone"
+                android:paddingLeft="16dp"
+                android:textColorHint="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/sign_up_user_email"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/button_outline"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="text"
+                android:paddingLeft="16dp"
+                android:textColorHint="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/sign_up_user_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/button_outline"
+                android:ems="10"
+                android:hint="password"
+                android:inputType="textPassword"
+                android:paddingLeft="16dp"
+                android:textColorHint="@android:color/darker_gray" />
+
+            <EditText
+                android:id="@+id/sign_up_user_password_two"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/button_outline"
+                android:ems="10"
+                android:hint="Reenter password"
+                android:inputType="textPassword"
+                android:paddingLeft="16dp"
+                android:textColorHint="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/sign_up_button"
+                style="@style/text_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Sign Up" />
+
+            <TextView
+                android:id="@+id/sign_up_later"
+                style="@style/text_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_grey"
+                android:text="Later" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

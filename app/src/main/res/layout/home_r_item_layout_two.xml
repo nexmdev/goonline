@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+
+    android:background="@android:color/white"
+    android:paddingTop="16dp"
+    app:columnCount="2">
+
+    <TextView
+        android:id="@+id/home_r_view_title_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:paddingLeft="10dp"
+        android:text="TextView"
+        android:textAppearance="@style/text_button"
+
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/home_r_view_seeall_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:drawablePadding="10dp"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:gravity="right|center_vertical"
+        android:paddingRight="10dp"
+        android:text="See All"
+        android:textColor="@color/green"
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="16dp"
+
+        android:background="#D7CCC8"
+        app:layout_columnSpan="2"
+        app:layout_columnWeight="1" />
+
+    <ImageView
+        android:id="@+id/home_r_view_one_imageview"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_columnWeight="1"
+        app:srcCompat="@drawable/auto_rik" />
+
+    <ImageView
+        android:id="@+id/home_r_view_two_imageview"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        app:layout_columnWeight="1"
+        app:srcCompat="@drawable/auto_rik" />
+
+    <TextView
+        android:id="@+id/home_r_view_itemone_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/home_r_view_itemthree_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/home_r_view_itemtwo_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:text="TextView"
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/home_r_view_itemfour_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:text="TextView"
+        app:layout_columnWeight="1" />
+
+    <ImageView
+        android:id="@+id/home_r_view_three_imageview"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitCenter"
+        app:layout_columnWeight="1"
+        app:srcCompat="@drawable/auto_rik" />
+
+    <ImageView
+        android:id="@+id/home_r_view_four_imageview"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitCenter"
+        app:layout_columnWeight="1"
+        app:srcCompat="@drawable/auto_rik" />
+
+    <TextView
+        android:id="@+id/home_r_view_itemfive_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/home_r_view_itemseven_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/home_r_view_itemsix_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:paddingBottom="16dp"
+        android:text="TextView"
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/home_r_view_itemeight_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:paddingBottom="16dp"
+        android:text="TextView"
+        app:layout_columnWeight="1" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_columnSpan="2"
+        app:layout_columnWeight="1" />
+
+</android.support.v7.widget.GridLayout>

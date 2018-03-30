@@ -1,0 +1,148 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nexm.ghatanjionline.fragments.AddItemFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ProgressBar
+        android:id="@+id/add_item_progressbar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/add_item_editText_provider_mobile_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Provider Mobile Number"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/add_item_mo_no_submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Verify" />
+
+            <Spinner
+                android:id="@+id/add_item_spinner_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/add_item_spinner_subcategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/add_item_editText_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Product Name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/add_item_editText_item_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Product Price"
+                android:inputType="numberDecimal" />
+
+            <EditText
+                android:id="@+id/add_item_editText_item_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Product Description"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/add_item_editText_provider_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Provider Name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/add_item_editText_provider_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Provider Address"
+                android:inputType="textPostalAddress" />
+
+            <EditText
+                android:id="@+id/add_item_editText_provider_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Provider Email"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/add_item_editText_return_policy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Return Policy"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/add_item_editText_min_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Minimum Order"
+                android:inputType="text|number" />
+
+            <EditText
+                android:id="@+id/add_item_editText_delivery_charges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Delivery Charges"
+                android:inputType="numberDecimal" />
+
+            <CheckBox
+                android:id="@+id/add_item_checkbox_cod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="COD Available" />
+
+            <CheckBox
+                android:id="@+id/add_item_checkbox_return"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Return Available" />
+
+            <Button
+                android:id="@+id/add_item_button_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+
+                android:layout_marginTop="16dp"
+                android:text="Submit" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
