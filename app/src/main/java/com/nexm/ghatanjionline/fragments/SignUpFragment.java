@@ -43,6 +43,7 @@ public class SignUpFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         final TextView signUp = (TextView)view.findViewById(R.id.sign_up_button);
         final TextView later = (TextView)view.findViewById(R.id.sign_up_later);
+        getActivity().setTitle("Sign in");
         emailTextView = (TextView)view.findViewById(R.id.sign_up_user_email);
         passwordTextView = (TextView)view.findViewById(R.id.sign_up_user_password);
         later.setOnClickListener(new View.OnClickListener() {
