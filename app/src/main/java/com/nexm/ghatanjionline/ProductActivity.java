@@ -1,18 +1,14 @@
 package com.nexm.ghatanjionline;
 
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
+import com.google.android.material.appbar.AppBarLayout;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.nexm.ghatanjionline.Constants.ConstantRef;
 import com.nexm.ghatanjionline.fragments.AllCategoriesFragment;
@@ -25,7 +21,6 @@ import com.nexm.ghatanjionline.fragments.ServicesDetail;
 import com.nexm.ghatanjionline.fragments.SubCategoryFragment;
 import com.nexm.ghatanjionline.fragments.SubRepair;
 import com.nexm.ghatanjionline.fragments.WebAdFragment;
-import com.nexm.ghatanjionline.models.Detailsdata;
 import com.nexm.ghatanjionline.models.ListItem;
 
 public class ProductActivity extends AppCompatActivity

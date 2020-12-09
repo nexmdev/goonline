@@ -2,45 +2,30 @@ package com.nexm.ghatanjionline.fragments;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.nexm.ghatanjionline.Constants.ConstantRef;
 import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.ProductActivity;
 import com.nexm.ghatanjionline.R;
-import com.nexm.ghatanjionline.adapters.BaseHolder;
-import com.nexm.ghatanjionline.adapters.DataHolder;
 import com.nexm.ghatanjionline.adapters.ViewPagerAdapter;
-import com.nexm.ghatanjionline.models.CommentData;
-import com.nexm.ghatanjionline.models.Detailsdata;
-import com.nexm.ghatanjionline.models.ListItem;
 import com.nexm.ghatanjionline.models.Provider;
 import com.nexm.ghatanjionline.models.TransportItem;
-import com.nexm.ghatanjionline.models.subCategoryData;
 import com.nexm.ghatanjionline.util.SetViewPager;
 
 
@@ -113,12 +98,12 @@ public class ProductDetailFragment extends Fragment implements
             Glide.with(getActivity())
                     .load(provider.providerPHOTOURL)
                     .placeholder(R.drawable.ic_account_circle_black_24dp)
-                    .crossFade()
+                    //.crossFade()
                     .into(providerPhoto);
             Glide.with(getActivity())
                     .load(provider.providerPHOTOURL)
                     .placeholder(R.drawable.ic_account_circle_black_24dp)
-                    .crossFade()
+                    //.crossFade()
                     .into(driverPhoto);
 
            // final String emergencyAvailable = detailsdata.getEmergency() ? "Available" : "Not Available";

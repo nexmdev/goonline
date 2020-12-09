@@ -7,7 +7,7 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subCategory_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

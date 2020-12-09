@@ -1,8 +1,8 @@
 package com.nexm.ghatanjionline.adapters;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.PagerAdapter;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.nexm.ghatanjionline.R;
-import com.nexm.ghatanjionline.fragments.NewHomeFragment;
 
 /**
  * Created by user on 23-03-2017.
@@ -53,7 +52,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                 .with(mContext)
                 .load(mResources[position])
                 .placeholder(R.drawable.placeholder)
-                .crossFade()
+                //.crossFade()
                 .into(imageView);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

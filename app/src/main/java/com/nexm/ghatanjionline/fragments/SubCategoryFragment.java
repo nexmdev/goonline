@@ -2,22 +2,24 @@ package com.nexm.ghatanjionline.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
 import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.ProductActivity;
 import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.adapters.DataHolder;
 import com.nexm.ghatanjionline.models.ListItem;
-import com.nexm.ghatanjionline.models.subCategoryData;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,31 +81,27 @@ public class SubCategoryFragment extends Fragment {
 
         category = getArguments().getString("CATEGORY");
         subCategory = getArguments().getString("SUB_CATEGORY");
-        GOApplication.databaseReference= GOApplication.database.getReference()
+
+
+        final Query query = GOApplication.database.getReference()
                 .child("ListItems").child(category).child(subCategory);
-       /* GOApplication.databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data2 : dataSnapshot.getChildren()){
 
-                    subCategoryData data1 = data2.getValue(subCategoryData.class);
-                    data.add(data1);
-                    listAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
+        FirebaseRecyclerOptions<ListItem> options =  new FirebaseRecyclerOptions.Builder<ListItem>()
+                .setQuery(query, ListItem.class)
+                .build();
         mFirebaseAdapter = new FirebaseRecyclerAdapter<ListItem,DataHolder>(
-                ListItem.class,R.layout.other_options_recycler_view_item_layout,
-                DataHolder.class,GOApplication.databaseReference
+             options
         ) {
+            @NonNull
             @Override
-            protected void populateViewHolder(DataHolder viewHolder, final ListItem model, final int position) {
+            public DataHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.other_options_recycler_view_item_layout, parent, false);
+                return new DataHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(DataHolder viewHolder,final int position, final ListItem model) {
 
                 viewHolder.bindData(model,getActivity(),true);
                 viewHolder.setOnItemClickListener(new DataHolder.OnItemClickListener() {
@@ -119,6 +117,19 @@ public class SubCategoryFragment extends Fragment {
                     }
                 });
             }
+            @Override
+            public void onDataChanged() {
+                // Called each time there is a new data snapshot. You may want to use this method
+                // to hide a loading spinner or check for the "no documents" state and update your UI.
+                // ...
+            }
+
+            @Override
+            public void onError(DatabaseError e) {
+                // Called when there is an error getting data. You may want to update
+                // your UI to display an error message to the user.
+                // ...
+            }
         };
         if (context instanceof OnSubCategorySelected) {
             mListener = (OnSubCategorySelected) context;
@@ -132,10 +143,19 @@ public class SubCategoryFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        mFirebaseAdapter.cleanup();
+
     }
 
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFirebaseAdapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        mFirebaseAdapter.stopListening();
+    }
 
     /**
      * This interface must be implemented by activities that contain this

@@ -3,9 +3,9 @@ package com.nexm.ghatanjionline.adapters;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.models.ListItem;
-import com.nexm.ghatanjionline.models.subCategoryData;
 
 /**
  * Created by user on 18-04-2017.
@@ -103,7 +102,7 @@ public class DataHolder extends BaseHolder {
                     .load(data.itemPHOTOURL)
                     .placeholder(R.drawable.placeholder)
                     .fitCenter()
-                    .crossFade()
+                    //.crossFade()
                     .into(subImage);
 
             subRatingBar.setIsIndicator(true);

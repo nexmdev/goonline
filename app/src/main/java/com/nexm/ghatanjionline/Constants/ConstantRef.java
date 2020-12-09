@@ -22,6 +22,7 @@ public class ConstantRef {
     public static final String PROPERTY = "प्रॉपट्री";
     public static final String TRANSPORT = "ट्रांसपोर्ट";
     public static final String SERVICES = "सर्विसेस";
-    public static final String OLD_SHOP = "जुना बाजार";
+    public static final String OLD_SHOP = "२ हॅंड शॉप";
     public static final String FOOD = "फुड";
+    public static final String NEWS = "न्युज";
 }

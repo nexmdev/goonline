@@ -1,18 +1,9 @@
 package com.nexm.ghatanjionline;
 
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import com.nexm.ghatanjionline.fragments.SignUpFragment;
-import com.nexm.ghatanjionline.models.AdData;
-import com.nexm.ghatanjionline.models.Category;
-import com.nexm.ghatanjionline.models.subCategoryData;
 
 public class Main3Activity extends AppCompatActivity implements
         SignUpFragment.OnFragmentInteractionListener{

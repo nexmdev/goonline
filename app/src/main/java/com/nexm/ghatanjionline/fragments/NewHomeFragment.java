@@ -2,14 +2,17 @@ package com.nexm.ghatanjionline.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
 import com.nexm.ghatanjionline.Constants.ConstantRef;
 import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.R;
@@ -100,17 +103,21 @@ public class NewHomeFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        GOApplication.databaseReference = GOApplication.database.getReference()
+        final Query query = GOApplication.database.getReference()
                 .child("Ads").child("Home");
 
+        FirebaseRecyclerOptions<AdData> options =  new FirebaseRecyclerOptions.Builder<AdData>()
+                .setQuery(query, AdData.class)
+                .build();
+
+
         mFirebaseAdapter = new FirebaseRecyclerAdapter<AdData,BaseHolder>(
-                AdData.class,R.layout.home_recycle_view_item,
-                BaseHolder.class,GOApplication.databaseReference
+                options
         ) {
 
             @Override
-            protected void populateViewHolder(BaseHolder viewHolder,
-                                              final AdData model, final int position) {
+            protected void onBindViewHolder(BaseHolder viewHolder,final int position,
+                                              final AdData model) {
 
                 switch (model.type){
 
@@ -234,7 +241,7 @@ public class NewHomeFragment extends Fragment {
                         return new HomeRecycleHolderTypeContainer(userType2);
                     case ConstantRef.TYPE_THREE:
                         View userType3 = LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.home_r_category_grid, parent, false);
+                                .inflate(R.layout.home_r_category_grid_two, parent, false);
                         return new Home_Category_Grid_Holder(userType3);
                     case ConstantRef.TYPE_FOUR:
                         View userType4 = LayoutInflater.from(parent.getContext())
@@ -243,7 +250,9 @@ public class NewHomeFragment extends Fragment {
 
 
                 }
-                return super.onCreateViewHolder(parent, viewType);
+                View userType4 = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.home_top_slide_item, parent, false);
+                return new HeaderHolder(userType4);
             }
             @Override
             public int getItemViewType(int position){
@@ -262,6 +271,19 @@ public class NewHomeFragment extends Fragment {
 
                 }
                 return super.getItemViewType(position);
+            }
+            @Override
+            public void onDataChanged() {
+                // Called each time there is a new data snapshot. You may want to use this method
+                // to hide a loading spinner or check for the "no documents" state and update your UI.
+                // ...
+            }
+
+            @Override
+            public void onError(DatabaseError e) {
+                // Called when there is an error getting data. You may want to update
+                // your UI to display an error message to the user.
+                // ...
             }
         };
         if(context instanceof OnFragmentInteractionListener)
@@ -282,6 +304,16 @@ public class NewHomeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFirebaseAdapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        mFirebaseAdapter.stopListening();
     }
 
     /**

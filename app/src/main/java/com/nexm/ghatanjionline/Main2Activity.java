@@ -2,16 +2,19 @@ package com.nexm.ghatanjionline;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nexm.ghatanjionline.fragments.AllCategoriesFragment;
@@ -73,6 +76,13 @@ public class Main2Activity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main2, menu);
+        MenuItem kart = menu.findItem(R.id.menu_messages);
+        RelativeLayout badgeLayout = (RelativeLayout) kart.getActionView();
+        TextView  itemMessagesBadgeTextView = (TextView) badgeLayout.findViewById(R.id.badge_textView);
+        //itemMessagesBadgeTextView.setVisibility(View.GONE); // initially hidden
+        itemMessagesBadgeTextView.setText("03");
+        itemMessagesBadgeTextView.setVisibility(View.VISIBLE);
+
         return true;
     }
 
@@ -84,9 +94,12 @@ public class Main2Activity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_messages) {
+
+
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -108,7 +121,7 @@ public class Main2Activity extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-            Intent intent = new Intent(this,AddNewItemActivity.class);
+            Intent intent = new Intent(this,AddURItem.class);
             startActivity(intent);
 
 

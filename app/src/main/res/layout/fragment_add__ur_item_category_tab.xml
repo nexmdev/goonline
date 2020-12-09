@@ -1,0 +1,84 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.nexm.ghatanjionline.fragments.Add_Ur_item_category_tab">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Choose category" />
+
+            <Spinner
+                android:id="@+id/add_newItem_spinner_category"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_spinner"
+                android:paddingStart="16dp"
+                android:textColor="@color/textwhite" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView533"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Choose sub category" />
+
+            <Spinner
+                android:id="@+id/add_newItem_spinner_subcategory"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_spinner"
+                android:paddingStart="16dp"
+                android:textColor="@color/textwhite"
+
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/add_ur_item_category_tab_next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/green"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/ic_arrow_forward_black_24dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Next"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+    </LinearLayout>
+</ScrollView>

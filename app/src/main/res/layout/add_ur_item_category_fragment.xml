@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context="com.nexm.ghatanjionline.fragments.AddItem_Category_Fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/add_ur_item_category_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/add_ur_item_subcategory_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#ffffff"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/button"
+        android:drawablePadding="16dp"
+        android:drawableRight="@drawable/ic_arrow_forward_black_24dp"
+        android:padding="16dp"
+        android:text="Next"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

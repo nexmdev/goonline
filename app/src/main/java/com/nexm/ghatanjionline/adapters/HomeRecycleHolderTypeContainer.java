@@ -1,7 +1,7 @@
 package com.nexm.ghatanjionline.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -122,25 +122,25 @@ public class HomeRecycleHolderTypeContainer extends BaseHolder {
                 .with(mcontext)
                 .load(data.adType_url_1)
                 .placeholder(R.drawable.placeholder)
-                .crossFade()
+                //.crossFade()
                 .into(i1);
         Glide
                 .with(mcontext)
                 .load(data.selectedTag_url_2)
                 .placeholder(R.drawable.placeholder)
-                .crossFade()
+                //.crossFade()
                 .into(i2);
         Glide
                 .with(mcontext)
                 .load(data.listItemID_url_3)
                 .placeholder(R.drawable.placeholder)
-                .crossFade()
+               // .crossFade()
                 .into(i3);
         Glide
                 .with(mcontext)
                 .load(data.start_date_url_4)
                 .placeholder(R.drawable.placeholder)
-                .crossFade()
+                //.crossFade()
                 .into(i4);
         title.setText(data.category);
         t1.setText(data.end_date_title_1);

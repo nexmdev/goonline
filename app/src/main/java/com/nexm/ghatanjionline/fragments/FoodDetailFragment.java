@@ -3,8 +3,8 @@ package com.nexm.ghatanjionline.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,7 +122,7 @@ public class FoodDetailFragment extends Fragment  implements
                     .with(getActivity())
                     .load(foodItem.foodtItemPHOTO1)
                     .placeholder(R.drawable.placeholder)
-                    .crossFade()
+
                     .into(itemImage);
            // ownerName.setText(provider.providerNAME);
             price.setText(foodItem.foodItemPRICE);

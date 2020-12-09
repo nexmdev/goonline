@@ -1,16 +1,11 @@
 package com.nexm.ghatanjionline;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.nexm.ghatanjionline.fragments.AddItemFragment;
 import com.nexm.ghatanjionline.fragments.AllCategoriesFragment;
-import com.nexm.ghatanjionline.fragments.HomeFragment;
 import com.nexm.ghatanjionline.fragments.NewHomeFragment;
-import com.nexm.ghatanjionline.fragments.ProductCategoryFragment;
-import com.nexm.ghatanjionline.fragments.ServicesDetail;
 
 /**
  * Created by user on 22-03-2016.

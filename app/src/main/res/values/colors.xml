@@ -5,11 +5,12 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="webViewBack">#fdc689</color>
     <color name="table_background">#8ecafe</color>
-    <color name="dark_primary">#fcb65e</color>
+    <color name="dark_primary">#FCB65E</color>
     <color name="green">#00a651</color>
     <color name="background_gray">#efefef</color>
     <color name="yellow">#fad48e</color>
-    <color name="orange">#fe6902</color>
-    <color name="darkOrange">#b44900</color>
+    <color name="orange">#FE6902</color>
+    <color name="darkOrange">#B44900</color>
     <color name="semitransperent">#b3050505</color>
+    <color name="textwhite">#ffffff</color>
 </resources>

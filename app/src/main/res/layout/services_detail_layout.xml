@@ -5,13 +5,13 @@
     android:layout_height="wrap_content"
     android:background="@null">
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:background="@null">
 
-        <android.support.v7.widget.GridLayout
+        <androidx.gridlayout.widget.GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:columnCount="2">
@@ -241,8 +241,8 @@
 
             </FrameLayout>
 
-        </android.support.v7.widget.GridLayout>
-    </android.support.v4.widget.NestedScrollView>
+        </androidx.gridlayout.widget.GridLayout>
+    </androidx.core.widget.NestedScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

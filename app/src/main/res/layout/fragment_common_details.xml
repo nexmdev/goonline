@@ -39,7 +39,7 @@
             android:padding="16dp"
             android:text="@string/related_products" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_detail_recycler_view_other_options"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -1,16 +1,13 @@
 package com.nexm.ghatanjionline.util;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v4.view.ViewPager;
+
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.nexm.ghatanjionline.R;
-import com.nexm.ghatanjionline.adapters.HeaderHolder;
 import com.nexm.ghatanjionline.adapters.ViewPagerAdapter;
-import com.nexm.ghatanjionline.fragments.NewHomeFragment;
 
 /**
  * Created by user on 23-01-2018.

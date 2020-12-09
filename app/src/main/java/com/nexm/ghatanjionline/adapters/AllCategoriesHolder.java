@@ -1,7 +1,7 @@
 package com.nexm.ghatanjionline.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.models.Category;
-import com.nexm.ghatanjionline.models.CategoryItemData;
 
 /**
  * Created by user on 03-02-2018.
@@ -54,7 +53,7 @@ public class AllCategoriesHolder extends RecyclerView.ViewHolder {
         Glide
                 .with(mcontext)
                 .load(data.categoryPHOTO)
-                .crossFade()
+                //.crossFade()
                 .placeholder(R.drawable.placeholder_one_fifty)
                 .into(imageView);
     }

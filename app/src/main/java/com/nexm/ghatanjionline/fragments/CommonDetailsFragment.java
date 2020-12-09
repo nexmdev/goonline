@@ -4,10 +4,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +17,11 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.nexm.ghatanjionline.Constants.ConstantRef;
 import com.nexm.ghatanjionline.GOApplication;
@@ -115,14 +117,21 @@ public class CommonDetailsFragment extends Fragment {
         itemID = getArguments().getString("ITEM_ID");
         currentPosition = getArguments().getInt("POSITION");
 
+        final Query query = GOApplication.database.getReference()
+                .child("ListItems")
+                .child(category).child(subCategory);
+
+        FirebaseRecyclerOptions<ListItem> options =  new FirebaseRecyclerOptions.Builder<ListItem>()
+                .setQuery(query, ListItem.class)
+                .build();
+
         GOApplication.databaseReference= GOApplication.database.getReference()
                 .child("ListItems") .child(category).child(subCategory);
         mFirebaseAdapter = new FirebaseRecyclerAdapter<ListItem,BaseHolder>(
-                ListItem.class,R.layout.other_options_recycler_view_item_layout,
-                BaseHolder.class,GOApplication.databaseReference
+                options
         ) {
             @Override
-            protected void populateViewHolder(BaseHolder viewHolder, ListItem model, int position) {
+            protected void onBindViewHolder(BaseHolder viewHolder,int position, ListItem model) {
                 if(position==currentPosition){
                     viewHolder.bindData1();
                 }else {
@@ -141,7 +150,11 @@ public class CommonDetailsFragment extends Fragment {
                                 .inflate(R.layout.other_options_recycler_view_item_layout, parent, false);
                         return new DataHolder(userType2);
                 }
-                return super.onCreateViewHolder(parent, viewType);
+                View userType1 = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.zeo_width_layout, parent, false);
+                return new BaseHolder(userType1);
+                //final BaseHolder baseHolder = super.onCreateViewHolder(parent, viewType);
+               // return baseHolder;
             }
             @Override
             public int getItemViewType(int position){
@@ -152,6 +165,19 @@ public class CommonDetailsFragment extends Fragment {
                 }
 
             }
+            @Override
+            public void onDataChanged() {
+                // Called each time there is a new data snapshot. You may want to use this method
+                // to hide a loading spinner or check for the "no documents" state and update your UI.
+                // ...
+            }
+
+            @Override
+            public void onError(DatabaseError e) {
+                // Called when there is an error getting data. You may want to update
+                // your UI to display an error message to the user.
+                // ...
+            }
 
         };
 
@@ -161,7 +187,17 @@ public class CommonDetailsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        mFirebaseAdapter.cleanup();
+
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFirebaseAdapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        mFirebaseAdapter.stopListening();
     }
 
     /**

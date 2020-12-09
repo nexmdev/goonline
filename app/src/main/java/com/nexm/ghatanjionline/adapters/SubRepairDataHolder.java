@@ -1,7 +1,7 @@
 package com.nexm.ghatanjionline.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -78,7 +78,7 @@ public class SubRepairDataHolder extends RecyclerView.ViewHolder {
                 .load(data.subRepairImage_url)
                 .placeholder(R.drawable.placeholder)
                 .fitCenter()
-                .crossFade()
+                //.crossFade()
                 .into(subRepairImageView);
 
         subRepairRatingBarView.setIsIndicator(true);

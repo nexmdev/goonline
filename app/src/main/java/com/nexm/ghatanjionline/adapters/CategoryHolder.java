@@ -1,7 +1,7 @@
 package com.nexm.ghatanjionline.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,7 +54,7 @@ public class CategoryHolder extends RecyclerView.ViewHolder {
                     .with(mcontext)
                     .load(category.categoryPHOTO)
                     .placeholder(R.drawable.placeholder)
-                    .crossFade()
+                    //.crossFade()
                     .into(categoryImage);
 
 

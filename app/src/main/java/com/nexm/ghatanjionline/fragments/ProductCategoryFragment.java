@@ -1,26 +1,26 @@
 package com.nexm.ghatanjionline.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
 import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.ProductActivity;
 import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.adapters.CategoryHolder;
-import com.nexm.ghatanjionline.adapters.CustomRecyclerAdapter;
 import com.nexm.ghatanjionline.models.Category;
-import com.nexm.ghatanjionline.models.CategoryItemData;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,21 +94,34 @@ public class ProductCategoryFragment extends Fragment {
                     + " must implement OnSubCategorySelected");
         }
         final String category = getArguments().getString("CATEGORY");
+        final Query query;
         if(category==null){
-            GOApplication.databaseReference  = GOApplication.database.getReference()
+            query  = GOApplication.database.getReference()
                     .child("SubCategory").child("ट्रांसपोर्ट");
         }else{
-            GOApplication.databaseReference  = GOApplication.database.getReference()
+            query  = GOApplication.database.getReference()
                     .child("SubCategory").child(category);
         }
 
+
+        FirebaseRecyclerOptions<Category> options =  new FirebaseRecyclerOptions.Builder<Category>()
+                .setQuery(query, Category.class)
+                .build();
+
         adapter = new FirebaseRecyclerAdapter<Category,CategoryHolder>(
-                Category.class,R.layout.category_item_layout,CategoryHolder.class,
-                GOApplication.databaseReference
+               options
 
         ) {
+            @NonNull
             @Override
-            protected void populateViewHolder(CategoryHolder viewHolder, Category model, int position) {
+            public CategoryHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.category_item_layout, parent, false);
+                return  new CategoryHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(CategoryHolder viewHolder, int position, Category model) {
                 viewHolder.bindData(model,getActivity());
                 viewHolder.setOnItemClickListner(new CategoryHolder.OnItemClickListener() {
                     @Override
@@ -118,6 +131,19 @@ public class ProductCategoryFragment extends Fragment {
                     }
                 });
             }
+            @Override
+            public void onDataChanged() {
+                // Called each time there is a new data snapshot. You may want to use this method
+                // to hide a loading spinner or check for the "no documents" state and update your UI.
+                // ...
+            }
+
+            @Override
+            public void onError(DatabaseError e) {
+                // Called when there is an error getting data. You may want to update
+                // your UI to display an error message to the user.
+                // ...
+            }
         };
 
     }
@@ -126,7 +152,17 @@ public class ProductCategoryFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        adapter.cleanup();
+
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
     @Override
     public void onPause(){

@@ -3,8 +3,8 @@ package com.nexm.ghatanjionline.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -200,7 +200,7 @@ public class ServicesDetail extends Fragment implements
                     Glide.with(getActivity())
                             .load(provider.providerPHOTOURL)
                             .placeholder(R.drawable.ic_account_circle_black_24dp)
-                            .crossFade()
+                            //.crossFade()
                             .into(imageView);
 
                 }
@@ -223,7 +223,7 @@ public class ServicesDetail extends Fragment implements
                     imageView.setAdjustViewBounds(true);
                     Glide.with(getActivity())
                             .load(propertyItem.rentalsItemPHOTO1)
-                            .crossFade()
+                            //.crossFade()
                             .into(imageView);
                 }
                 break;

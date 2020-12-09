@@ -1,7 +1,7 @@
 package com.nexm.ghatanjionline.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -51,7 +51,7 @@ public class HomeRecycleHolder extends BaseHolder {
         Glide
                 .with(mcontext)
                 .load(data.adImageUrl_title_2)
-                .crossFade()
+                //.crossFade()
                 .into(imageView);
     }
 }

@@ -3,15 +3,20 @@ package com.nexm.ghatanjionline.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.adapters.SubRepairDataHolder;
@@ -102,14 +107,28 @@ public class SubRepair extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-        reference = GOApplication.database.getReference().child("List")
+        final Query query = GOApplication.database.getReference()
+                .child("List")
                 .child("Repair");
+
+        FirebaseRecyclerOptions<SubRepairData> options =  new FirebaseRecyclerOptions.Builder<SubRepairData>()
+                .setQuery(query, SubRepairData.class)
+                .build();
+
+
         adapter = new FirebaseRecyclerAdapter<SubRepairData,SubRepairDataHolder>(
-                SubRepairData.class,R.layout.sub_repair_item_layout,
-                SubRepairDataHolder.class, reference
+           options
         ) {
+            @NonNull
             @Override
-            protected void populateViewHolder(SubRepairDataHolder viewHolder, final SubRepairData model, final int position) {
+            public SubRepairDataHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.sub_repair_item_layout, parent, false);
+                return new SubRepairDataHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(SubRepairDataHolder viewHolder,final int position, final SubRepairData model) {
 
                 viewHolder.bindData(model,getActivity());
                 viewHolder.setOnItemClickListener(new SubRepairDataHolder.OnItemClickListener() {
@@ -122,6 +141,19 @@ public class SubRepair extends Fragment {
                         }
                     }
                 });
+            }
+            @Override
+            public void onDataChanged() {
+                // Called each time there is a new data snapshot. You may want to use this method
+                // to hide a loading spinner or check for the "no documents" state and update your UI.
+                // ...
+            }
+
+            @Override
+            public void onError(DatabaseError e) {
+                // Called when there is an error getting data. You may want to update
+                // your UI to display an error message to the user.
+                // ...
             }
         };
         if (context instanceof OnFragmentInteractionListener) {
@@ -136,6 +168,16 @@ public class SubRepair extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     /**

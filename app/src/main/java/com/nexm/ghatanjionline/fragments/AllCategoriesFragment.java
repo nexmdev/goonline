@@ -2,17 +2,21 @@ package com.nexm.ghatanjionline.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.nexm.ghatanjionline.GOApplication;
-import com.nexm.ghatanjionline.ProductActivity;
 import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.adapters.AllCategoriesHolder;
 import com.nexm.ghatanjionline.models.Category;
@@ -101,13 +105,24 @@ public class AllCategoriesFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+        final Query query = GOApplication.database.getReference()
+                .child("Category");
+
+        FirebaseRecyclerOptions<Category> options =  new FirebaseRecyclerOptions.Builder<Category>()
+                .setQuery(query, Category.class)
+                .build();
         reference = GOApplication.database.getReference().child("Category");
         adapter = new FirebaseRecyclerAdapter<Category,AllCategoriesHolder>(
-                Category.class,R.layout.all_categories_recycler_view_item_layout,
-                AllCategoriesHolder.class,reference
+               options
         ) {
+            public AllCategoriesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.all_categories_recycler_view_item_layout, parent, false);
+
+                return new AllCategoriesHolder(view);
+            }
             @Override
-            protected void populateViewHolder(AllCategoriesHolder viewHolder, Category model, int position) {
+            protected void onBindViewHolder(AllCategoriesHolder viewHolder, int position, Category model) {
 
                 viewHolder.bindData(model,getActivity());
                 viewHolder.setOnItemClickListener(new AllCategoriesHolder.OnItemClickListener() {
@@ -121,15 +136,38 @@ public class AllCategoriesFragment extends Fragment {
                 });
 
             }
+            @Override
+            public void onDataChanged() {
+                // Called each time there is a new data snapshot. You may want to use this method
+                // to hide a loading spinner or check for the "no documents" state and update your UI.
+                // ...
+            }
+
+            @Override
+            public void onError(DatabaseError e) {
+                // Called when there is an error getting data. You may want to update
+                // your UI to display an error message to the user.
+                // ...
+            }
         };
 
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        adapter.cleanup();
+
     }
 
 

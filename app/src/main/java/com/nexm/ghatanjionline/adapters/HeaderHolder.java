@@ -1,14 +1,12 @@
 package com.nexm.ghatanjionline.adapters;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
+import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import android.view.View;
 
 import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.models.AdData;
-import com.nexm.ghatanjionline.util.ClickableViewPager;
 import com.nexm.ghatanjionline.util.SetViewPager;
 
 /**
