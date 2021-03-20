@@ -104,7 +104,7 @@ public class AddItem_Category_Fragment extends Fragment {
                     @Override
                     public void onItemClick(View itemView, int position) {
                         Category subCategory = getItem(position);
-                        category = subCategory.categoryID;
+                        category = subCategory.getNAME();
                        // mListener.onCategorySelection(subCategory.categoryID,category );
 
                     }

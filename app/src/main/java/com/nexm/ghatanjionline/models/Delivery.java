@@ -8,14 +8,14 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Delivery {
 
-    public String deliveryID;
-    public String deliveryRETURN_POLICY;
-    public String deliveryTIME = "X";
+    private String deliveryID;
+    private String deliveryRETURN_POLICY;
+    private String deliveryTIME = "X";
 
-    public int deliveryMIN_ORDER;
-    public int deliveryDELIVERY_CHARGES;
-    public Boolean deliveryCOD_AVAILABLE;
-    public Boolean deliveryRETURN_AVAILABLE;
+    private int deliveryMIN_ORDER;
+    private int deliveryDELIVERY_CHARGES;
+    private Boolean deliveryCOD_AVAILABLE;
+    private Boolean deliveryRETURN_AVAILABLE;
 
     public Delivery(){}
 
@@ -46,6 +46,34 @@ public class Delivery {
     public void setDeliveryRETURN_AVAILABLE(Boolean mdeliveryRETURNAVAILABLE){
 
         this.deliveryRETURN_AVAILABLE = mdeliveryRETURNAVAILABLE;
+    }
+
+    public int getDeliveryDELIVERY_CHARGES() {
+        return deliveryDELIVERY_CHARGES;
+    }
+
+    public Boolean getDeliveryCOD_AVAILABLE() {
+        return deliveryCOD_AVAILABLE;
+    }
+
+    public Boolean getDeliveryRETURN_AVAILABLE() {
+        return deliveryRETURN_AVAILABLE;
+    }
+
+    public int getDeliveryMIN_ORDER() {
+        return deliveryMIN_ORDER;
+    }
+
+    public String getDeliveryID() {
+        return deliveryID;
+    }
+
+    public String getDeliveryRETURN_POLICY() {
+        return deliveryRETURN_POLICY;
+    }
+
+    public String getDeliveryTIME() {
+        return deliveryTIME;
     }
 
 }

@@ -3,6 +3,8 @@ package com.nexm.ghatanjionline;
 import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
+
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
@@ -17,6 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.nexm.ghatanjionline.fragments.AllCategoriesFragment;
 import com.nexm.ghatanjionline.fragments.NewHomeFragment;
 import com.nexm.ghatanjionline.models.AdData;
@@ -80,9 +85,32 @@ public class Main2Activity extends AppCompatActivity
         RelativeLayout badgeLayout = (RelativeLayout) kart.getActionView();
         TextView  itemMessagesBadgeTextView = (TextView) badgeLayout.findViewById(R.id.badge_textView);
         //itemMessagesBadgeTextView.setVisibility(View.GONE); // initially hidden
-        itemMessagesBadgeTextView.setText("03");
-        itemMessagesBadgeTextView.setVisibility(View.VISIBLE);
+        GOApplication.databaseReference.child("CUSTOMERS")
+                .child(getIntent().getStringExtra("CUSTOMER_UID"))
+                .child("cartitemsNo")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            itemMessagesBadgeTextView.setText("0"+snapshot.getValue().toString());
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+        itemMessagesBadgeTextView.setVisibility(View.VISIBLE);
+        badgeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2Activity.this,Main3Activity.class);
+                intent.putExtra("CALLER","Cart");
+                intent.putExtra("userID",getIntent().getStringExtra("CUSTOMER_UID"));
+                startActivity(intent);
+            }
+        });
         return true;
     }
 
@@ -95,7 +123,10 @@ public class Main2Activity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_messages) {
-
+            Intent intent = new Intent(Main2Activity.this,Main3Activity.class);
+            intent.putExtra("CALLER","Cart");
+            intent.putExtra("userID",getIntent().getStringExtra("CUSTOMER_UID"));
+            startActivity(intent);
 
             return true;
         }
@@ -125,7 +156,11 @@ public class Main2Activity extends AppCompatActivity
             startActivity(intent);
 
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_order) {
+            Intent intent = new Intent(this,Main3Activity.class);
+            intent.putExtra("CALLER","Order");
+            intent.putExtra("userID",getIntent().getStringExtra("CUSTOMER_UID"));
+            startActivity(intent);
 
         } else if (id == R.id.nav_share) {
 

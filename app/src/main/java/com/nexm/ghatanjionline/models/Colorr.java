@@ -6,13 +6,13 @@ import com.google.firebase.database.IgnoreExtraProperties;
  * Created by user on 15-06-2017.
  */
 @IgnoreExtraProperties
-public class Color {
+public class Colorr {
 
     public String colorNAME;
     public String colorPHOTO;
     public int colorQUANTITY;
 
-    public Color(){}
+    public Colorr(){}
 
     public void setColorNAME(String name){
         this.colorNAME = name;

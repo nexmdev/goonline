@@ -2,15 +2,17 @@
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#b4b5af</color>
-    <color name="colorAccent">#FFFFFF</color>
+    <color name="colorAccent">#FE6902</color>
     <color name="webViewBack">#fdc689</color>
     <color name="table_background">#8ecafe</color>
     <color name="dark_primary">#FCB65E</color>
-    <color name="green">#00a651</color>
+    <color name="green">#10c806</color>
     <color name="background_gray">#efefef</color>
     <color name="yellow">#fad48e</color>
     <color name="orange">#FE6902</color>
-    <color name="darkOrange">#B44900</color>
+    <color name="darkOrange">#C6B44900</color>
     <color name="semitransperent">#b3050505</color>
     <color name="textwhite">#ffffff</color>
+    <color name="blue">#2445FB</color>
+    <color name="textGrey">#6f6f6f</color>
 </resources>

@@ -30,7 +30,7 @@ import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.models.Delivery;
 import com.nexm.ghatanjionline.models.ExtraItemInfo;
 import com.nexm.ghatanjionline.models.Item;
-import com.nexm.ghatanjionline.models.ListItem;
+import com.nexm.ghatanjionline.models.ProductListing;
 import com.nexm.ghatanjionline.models.Provider;
 
 /**
@@ -52,7 +52,7 @@ public class AddItemFragment extends Fragment {
     private Provider provider;
     private Delivery delivery;
     private CheckBox box1,box2;
-    private ListItem listItem;
+    private ProductListing productListing;
     private Button b , verifyButton;
     private ProgressBar progressBar;
     private  final DatabaseReference ref = GOApplication.database.getReference();
@@ -105,7 +105,7 @@ public class AddItemFragment extends Fragment {
         item = new Item();
         delivery = new Delivery();
         provider = new Provider();
-        listItem = new ListItem();
+        productListing = new ProductListing();
 
         b = (Button)view.findViewById(R.id.add_item_button_submit);
         verifyButton = (Button)view.findViewById(R.id.add_item_mo_no_submit_button);
@@ -263,18 +263,11 @@ public class AddItemFragment extends Fragment {
 
         if(category.matches("Food")||category.matches("Old Shop")||category.matches("Cloths")||category.matches("Crafts")){
 
-            delivery.deliveryCOD_AVAILABLE = box1.isChecked();
-            delivery.deliveryRETURN_AVAILABLE = box2.isChecked();
-            delivery.deliveryRETURN_POLICY = e8.getText().toString();
-            delivery.deliveryMIN_ORDER = Integer.parseInt(e9.getText().toString());
-            delivery.deliveryDELIVERY_CHARGES = Integer.parseInt(e10.getText().toString());
-            delivery.deliveryID = ref.child(ConstantRef.DELIVERIES).push().getKey();
-            listItem.deliveryID = delivery.deliveryID;
-            ref.child(ConstantRef.DELIVERIES).child(delivery.deliveryID).setValue(delivery).addOnCompleteListener(ol);
+
 
         }else{
 
-            listItem.deliveryID = ConstantRef.DELIVERY_NOT_APPLICABLE;
+
             ExtraItemInfo extraItemInfo = new ExtraItemInfo();
             extraItemInfo.emergencyPOLICY = e8.getText().toString();
             extraItemInfo.itemYEAR = e10.getText().toString();
@@ -308,16 +301,16 @@ public class AddItemFragment extends Fragment {
         }
 
 
-        listItem.itemNAME = e1.getText().toString();
+        productListing.setProductName(e1.getText().toString());
     //    listItem.itemPRICE = Float.parseFloat(e2.getText().toString());
-        listItem.providerNAME = e4.getText().toString();
-        listItem.itemID = item.itemID;
-        listItem.providerID = provider.providerID;
+        productListing.setSellerName(e4.getText().toString());
+
+        productListing.setSellerID(provider.providerID);
 
 
         ref.child(ConstantRef.ITEMS).child(item.itemID).setValue(item);
 
-        ref.child(ConstantRef.LIST).child(category).child(subCategory).push().setValue(listItem).addOnCompleteListener(ol);
+        ref.child(ConstantRef.LIST).child(category).child(subCategory).push().setValue(productListing).addOnCompleteListener(ol);
 
     }
     private void setOptionalHints(){

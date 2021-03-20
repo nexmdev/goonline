@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -24,6 +23,7 @@ import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.ProductActivity;
 import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.adapters.ViewPagerAdapter;
+import com.nexm.ghatanjionline.models.ProductListing;
 import com.nexm.ghatanjionline.models.Provider;
 import com.nexm.ghatanjionline.models.TransportItem;
 import com.nexm.ghatanjionline.util.SetViewPager;
@@ -145,7 +145,7 @@ public class ProductDetailFragment extends Fragment implements
     }
 
     @Override
-    public void onCommonDetailsClick(Uri uri) {
+    public void onCommonDetailsClick(ProductListing productListing, int position, String productID) {
 
     }
     @Override

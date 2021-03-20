@@ -27,7 +27,7 @@ import com.nexm.ghatanjionline.Constants.ConstantRef;
 import com.nexm.ghatanjionline.adminFragments.AddFoodFragment;
 import com.nexm.ghatanjionline.models.Category;
 import com.nexm.ghatanjionline.models.Delivery;
-import com.nexm.ghatanjionline.models.ListItem;
+import com.nexm.ghatanjionline.models.ProductListing;
 import com.nexm.ghatanjionline.models.Provider;
 import com.nexm.ghatanjionline.models.ProviderItemList;
 
@@ -36,7 +36,7 @@ import java.util.ArrayList;
 public class AddNewItemActivity extends AppCompatActivity {
 
     private DatabaseReference reference;
-    public static ListItem listItem;
+    public static ProductListing productListing;
     public static ProgressBar progressBar;
     private LinearLayout providerLayout,deliveryLayout;
     private EditText pNAME,pMONO,pADDRESS,pEMAIL;
@@ -53,7 +53,7 @@ public class AddNewItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_new_item);
 
 
-        listItem = new ListItem();
+        productListing = new ProductListing();
         progressBar = (ProgressBar)findViewById(R.id.progressBar_addNewItem);
         providerLayout = (LinearLayout)findViewById(R.id.provider_layout);
         deliveryLayout = (LinearLayout)findViewById(R.id.deliveryLayout);
@@ -81,7 +81,7 @@ public class AddNewItemActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
                     Category categoryModel = snapshot.getValue(Category.class);
-                    categories.add(categoryModel.categoryID);
+                    categories.add(categoryModel.getNAME());
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_item, categories);
                 arrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
@@ -145,7 +145,7 @@ public class AddNewItemActivity extends AppCompatActivity {
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Category subCategory = snapshot.getValue(Category.class);
-                    subCategories.add(subCategory.categoryID);
+                    subCategories.add(subCategory.getNAME());
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getApplicationContext(),R.layout.spinner_item, subCategories);
                 arrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
@@ -228,8 +228,8 @@ public class AddNewItemActivity extends AppCompatActivity {
             pID = provider.providerID;
             noItems = provider.providerNO_OF_ITEMS;
             progressBar.setVisibility(View.GONE);
-            listItem.providerID = pID;
-            listItem.providerNAME = provider.providerNAME;
+            productListing.setSellerID(pID);
+            productListing.setSellerName(provider.providerNAME);
         }
 
     }
@@ -247,8 +247,8 @@ public class AddNewItemActivity extends AppCompatActivity {
             reference = GOApplication.database.getReference();
             newProvider.providerID = reference.child(ConstantRef.PROVIDERS).push().getKey();
 
-            listItem.providerID = newProvider.providerID;
-            listItem.providerNAME = newProvider.providerNAME;
+            productListing.setSellerID(newProvider.providerID);
+            productListing.setSellerName(newProvider.providerNAME);
 
             reference.child(ConstantRef.PROVIDERS).child(newProvider.providerID)
                     .setValue(newProvider)
@@ -277,16 +277,16 @@ public class AddNewItemActivity extends AppCompatActivity {
         final CheckBox dCOD_AVAILABLE = (CheckBox) findViewById(R.id.add_newItem_checkbox_cod);
 
         final Delivery delivery = new Delivery();
-        delivery.deliveryRETURN_POLICY = dRETURN_POLICY.getText().toString();
-        delivery.deliveryMIN_ORDER = Integer.parseInt(dMIN_ORDER.getText().toString());
-        delivery.deliveryDELIVERY_CHARGES = Integer.parseInt(dDELIVERY_CHARGES.getText().toString());
-        delivery.deliveryRETURN_AVAILABLE = dRETURN_AVAILABLE.isChecked();
-        delivery.deliveryCOD_AVAILABLE = dCOD_AVAILABLE.isChecked();
-        delivery.deliveryTIME = dDELIVERY_TIME.getText().toString();
+        delivery.setDeliveryRETURN_POLICY(dRETURN_POLICY.getText().toString());
+        delivery.setDeliveryMIN_ORDER(Integer.parseInt(dMIN_ORDER.getText().toString()));
+        delivery.setDeliveryDELIVERY_CHARGES(Integer.parseInt(dDELIVERY_CHARGES.getText().toString()));
+        delivery.setDeliveryRETURN_AVAILABLE(dRETURN_AVAILABLE.isChecked());
+        delivery.setDeliveryCOD_AVAILABLE(dCOD_AVAILABLE.isChecked());
+        delivery.setDeliveryTIME(dDELIVERY_TIME.getText().toString());
 
         reference = GOApplication.database.getReference().child(ConstantRef.DELIVERIES);
-        delivery.deliveryID = reference.push().getKey();
-        reference.child(delivery.deliveryID).setValue(delivery)
+        delivery.setDeliveryID(reference.push().getKey());
+        reference.child(delivery.getDeliveryID()).setValue(delivery)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -301,7 +301,7 @@ public class AddNewItemActivity extends AppCompatActivity {
                             dMIN_ORDER.setText("");
                             dRETURN_AVAILABLE.setChecked(false);
                             dCOD_AVAILABLE.setChecked(false);
-                            AddNewItemActivity.listItem.deliveryID = delivery.deliveryID;
+
                         }else {
                             Toast.makeText(getApplicationContext(),"XXX Delivery Set Unsuccessful",Toast.LENGTH_SHORT).show();
 
@@ -317,7 +317,7 @@ public class AddNewItemActivity extends AppCompatActivity {
 
         progressBar.setVisibility(View.VISIBLE);
         reference = GOApplication.database.getReference();
-        reference.child(ConstantRef.LIST).child(category).child(subCategory).push().setValue(listItem)
+        reference.child(ConstantRef.LIST).child(category).child(subCategory).push().setValue(productListing)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -351,7 +351,7 @@ public class AddNewItemActivity extends AppCompatActivity {
                     .setValue(noItems);
 
             ProviderItemList providerItemList = new ProviderItemList();
-            providerItemList.itemID = listItem.itemID;
+
             providerItemList.categoryID = category;
             providerItemList.subCategoryID = subCategory;
 

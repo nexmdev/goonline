@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_messages"
-        app:showAsAction="always"
-        app:actionLayout="@layout/shooping_cart_icon_layout"/>
+        android:enabled="true"
+        android:title=''
+        app:actionLayout="@layout/shooping_cart_icon_layout"
+        app:showAsAction="always" />
 </menu>

@@ -32,4 +32,6 @@
     <string name="details">सविस्तर माहिती</string>
     <string name="buy">खरेदी करा</string>
     <string name="addToCart">खरेदी लिस्ट मधे जोडा</string>
+    <string name="sign_in_info_otp">आपल्या मोबाइल नंबर वर ओटिपी कोड असणारा मेसेज येइल</string>
+    <string name="sign_in_sms_charges">ओटिपी कोड असणारा मेसेज पाठवण्यासाठी एसएमएस चार्जेस लागू शकते.</string>
 </resources>

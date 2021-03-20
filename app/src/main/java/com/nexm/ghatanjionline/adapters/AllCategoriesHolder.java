@@ -48,11 +48,11 @@ public class AllCategoriesHolder extends RecyclerView.ViewHolder {
         });
     }
     public void bindData(Category data, Context mcontext){
-        title.setText(data.categoryID);
-        subTitle.setText(data.categoryNAME);
+        title.setText(data.getNAME());
+        subTitle.setText(data.getDESCRIPTION());
         Glide
                 .with(mcontext)
-                .load(data.categoryPHOTO)
+                .load(data.getIMAGE_URL())
                 //.crossFade()
                 .placeholder(R.drawable.placeholder_one_fifty)
                 .into(imageView);

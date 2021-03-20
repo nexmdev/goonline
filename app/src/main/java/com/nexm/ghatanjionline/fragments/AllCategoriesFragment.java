@@ -130,7 +130,7 @@ public class AllCategoriesFragment extends Fragment {
                     public void onItemClick(View itemView, int position) {
                         if(mListener != null){
                             Category data = (Category)adapter.getItem(position);
-                            mListener.onAllCategorySelected(data.categoryID);
+                            mListener.onAllCategorySelected(data.getNAME());
                         }
                     }
                 });

@@ -34,7 +34,7 @@
                     android:layout_marginBottom="10dp"
                     android:adjustViewBounds="true"
                     android:background="@null"
-                    app:srcCompat="@drawable/test" />
+                    app:srcCompat="@drawable/demobanner" />
 
                 <TextView
                     android:id="@+id/textView30"

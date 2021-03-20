@@ -1,7 +1,9 @@
 package com.nexm.ghatanjionline;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import com.google.android.material.appbar.AppBarLayout;
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +20,11 @@ import com.nexm.ghatanjionline.fragments.OldShopDetail;
 import com.nexm.ghatanjionline.fragments.ProductCategoryFragment;
 import com.nexm.ghatanjionline.fragments.ProductDetailFragment;
 import com.nexm.ghatanjionline.fragments.ServicesDetail;
+import com.nexm.ghatanjionline.fragments.SignUpFragment;
 import com.nexm.ghatanjionline.fragments.SubCategoryFragment;
 import com.nexm.ghatanjionline.fragments.SubRepair;
 import com.nexm.ghatanjionline.fragments.WebAdFragment;
-import com.nexm.ghatanjionline.models.ListItem;
+import com.nexm.ghatanjionline.models.ProductListing;
 
 public class ProductActivity extends AppCompatActivity
         implements  ProductCategoryFragment.OnFragmentInteractionListener
@@ -32,7 +35,8 @@ public class ProductActivity extends AppCompatActivity
                     CommonDetailsFragment.OnFragmentInteractionListener,
                     OldShopDetail.OnFragmentInteractionListener,
                     FoodDetailFragment.OnFragmentInteractionListener,
-                    WebAdFragment.OnFragmentInteractionListener{
+                    WebAdFragment.OnFragmentInteractionListener,
+        SignUpFragment.OnFragmentInteractionListener{
 
     public static AppBarLayout appBarLayout;
 
@@ -46,30 +50,34 @@ public class ProductActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
         if(savedInstanceState == null ) {
 
             String selectedsubCategory = getIntent().getStringExtra("Selected subCategory");
             String selectedCategory = getIntent().getStringExtra("Category");
             String itemID = getIntent().getStringExtra("ItemID");
-            String allCategories = getIntent().getStringExtra("AllCategories");
+            String caller = getIntent().getStringExtra("Caller");
+            String cartID = getIntent().getStringExtra("CartID");
+            cartID = cartID == null ? "x": cartID;
             String tag = getIntent().getStringExtra("Tag");
 
             switch (tag){
                 case "Sub":
                     goToSubCategory(selectedsubCategory, selectedCategory);
                     break;
-                case "Item":
+                case "Product":
                     GOApplication.databaseReference = GOApplication.database.getReference();
-                    GOApplication.databaseReference.child(ConstantRef.LIST)
-                            .child(selectedCategory)
-                            .child(selectedsubCategory)
+                    String finalCartID = cartID;
+                    GOApplication.databaseReference.child("ProductListings")
                             .child(itemID)
                             .addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     if(dataSnapshot.exists()){
-                                        ListItem listItem = dataSnapshot.getValue(ListItem.class);
-                                        goToItemDetail(listItem,-1);
+                                        ProductListing productListing = dataSnapshot.getValue(ProductListing.class);
+
+                                        goToItemDetail(productListing,-1,dataSnapshot.getKey(), finalCartID);
                                     }
                                 }
 
@@ -123,10 +131,10 @@ public class ProductActivity extends AppCompatActivity
     }
 
     @Override
-    public void onCategorySelected(String selectedCategory,String selectedsubCategory) {
+    public void onCategorySelected(String department,String category) {
 
         SubCategoryFragment fragment = SubCategoryFragment
-                .newInstance(selectedCategory,selectedsubCategory);
+                .newInstance(department,category);
 
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(android.R.anim.slide_in_left,
@@ -140,42 +148,40 @@ public class ProductActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction1(ListItem data, int currentposition){
-        goToItemDetail(data, currentposition);
+    public void onFragmentInteraction1(ProductListing data, int currentposition, String productID){
+        goToItemDetail(data, currentposition,productID, "x");
 
     }
 
-    private void goToItemDetail(ListItem data, int currentposition) {
+    private void goToItemDetail(ProductListing data, int currentposition, String productID, String cartID) {
         Bundle bundle = new Bundle();
+        bundle.putParcelable("Product_Listing",data);
+        bundle.putString("PRODUCT_ID",productID);
         bundle.putInt("POSITION",currentposition);
-        bundle.putInt("RATINGS",data.itemRATINGS);
-        bundle.putInt("NO_OF_USERS",data.itemNO_OF_REVIEWS);
-        bundle.putString("CATEGORY",data.category);
-        bundle.putString("SUB_CATEGORY",data.subCategory);
-        bundle.putString("ITEM_ID",data.itemID);
-        bundle.putString("PROVIDER_ID",data.providerID);
-        bundle.putString("DELIVERY_ID",data.deliveryID);
+        bundle.putString("CART_ID",cartID);
         Fragment fragment = null;
-        switch (data.category){
+        switch (data.getDepartment()){
 
             case "ट्रांसपोर्ट":
-                getSupportActionBar().setTitle(data.itemNAME);
+                getSupportActionBar().setTitle(data.getDepartment());
+
                 fragment = new ProductDetailFragment();
                 fragment.setArguments(bundle);
                 break;
             case "सर्विसेस":case ConstantRef.PROPERTY:
-                getSupportActionBar().setTitle(data.subCategory);
+                getSupportActionBar().setTitle(data.getDeptCat());
                 fragment = new ServicesDetail();
                 fragment.setArguments(bundle);
                 break;
             case ConstantRef.OLD_SHOP:
-                getSupportActionBar().setTitle(data.itemNAME);
+                getSupportActionBar().setTitle(data.getDepartment());
                 fragment = new OldShopDetail();
                 fragment.setArguments(bundle);
                 break;
             case ConstantRef.FOOD:
-                getSupportActionBar().setTitle(data.itemNAME);
-                fragment = new FoodDetailFragment();
+                String[] title = data.getDeptCat().split(",");
+
+               fragment = new FoodDetailFragment();
                 fragment.setArguments(bundle);
                 break;
         }
@@ -189,14 +195,18 @@ public class ProductActivity extends AppCompatActivity
                     .replace(R.id.product_activity_fragment_holder_layout,fragment)
                     .commit();
         }else{
-            getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(android.R.anim.slide_in_left,
-                            android.R.anim.slide_out_right,
-                            R.anim.slide_in_right,
-                            R.anim.slide_out_left)
-                    .replace(R.id.product_activity_fragment_holder_layout,fragment)
-                    .addToBackStack("SubCategory")
-                    .commit();
+            String backStateName = fragment.getClass().getName();
+            boolean fragmentPopped = getSupportFragmentManager().popBackStackImmediate(backStateName,0);
+            if(!fragmentPopped){
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(android.R.anim.slide_in_left,
+                                android.R.anim.slide_out_right,
+                                R.anim.slide_in_right,
+                                R.anim.slide_out_left)
+                        .replace(R.id.product_activity_fragment_holder_layout,fragment)
+                        .addToBackStack(backStateName)
+                        .commit();
+            }
         }
 
     }
@@ -237,8 +247,8 @@ public class ProductActivity extends AppCompatActivity
     }
 
     @Override
-    public void onCommonDetailsClick(Uri uri) {
-
+    public void onCommonDetailsClick(ProductListing productListing, int position, String productID) {
+        goToItemDetail(productListing, position,productID, "x");
     }
 
     @Override
@@ -252,13 +262,35 @@ public class ProductActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFoodDetailsClick(Uri uri) {
+    public void onFoodDetailsClick(String task) {
+        if(task.matches("SignIn")){
+            SignUpFragment signUpFragment = new SignUpFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(android.R.anim.slide_in_left,
+                            android.R.anim.slide_out_right,
+                            R.anim.slide_in_right,
+                            R.anim.slide_out_left)
+                    .replace(R.id.product_activity_fragment_holder_layout,signUpFragment)
+                    .addToBackStack("FoodDetail")
+                    .commit();
+        }else{
+            //Toast.makeText(ProductActivity.this,task,Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ProductActivity.this,Main3Activity.class);
+            intent.putExtra("CALLER","Cart");
+            intent.putExtra("userID",task);
+            startActivity(intent);
+        }
 
     }
 
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(int code) {
 
     }
 }

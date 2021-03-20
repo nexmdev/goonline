@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="बोलवा घरपोच..."
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -48,7 +48,7 @@
         android:layout_marginEnd="16dp"
         android:text="गरमागरम नास्ता , जेवन आपल्या आवडिच्या हॉटेल मधुन..."
         android:textAlignment="textEnd"
-        android:textSize="36sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView43" />

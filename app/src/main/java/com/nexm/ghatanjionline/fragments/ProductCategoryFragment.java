@@ -95,15 +95,16 @@ public class ProductCategoryFragment extends Fragment {
         }
         final String category = getArguments().getString("CATEGORY");
         final Query query;
-        if(category==null){
+        /*if(category==null){
             query  = GOApplication.database.getReference()
                     .child("SubCategory").child("ट्रांसपोर्ट");
         }else{
             query  = GOApplication.database.getReference()
                     .child("SubCategory").child(category);
-        }
-
-
+        }*/
+        final String department = "जेवण-नाश्ता-इत्यादी";
+        query  = GOApplication.database.getReference()
+                .child(department).child("Category");
         FirebaseRecyclerOptions<Category> options =  new FirebaseRecyclerOptions.Builder<Category>()
                 .setQuery(query, Category.class)
                 .build();
@@ -127,7 +128,7 @@ public class ProductCategoryFragment extends Fragment {
                     @Override
                     public void onItemClick(View itemView, int position) {
                         Category subCategory = getItem(position);
-                        mListener.onCategorySelected(category,subCategory.categoryID);
+                        mListener.onCategorySelected(department,subCategory.getNAME());
                     }
                 });
             }
@@ -172,6 +173,6 @@ public class ProductCategoryFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onCategorySelected(String category,String subcategory);
+        void onCategorySelected(String department,String category);
     }
 }

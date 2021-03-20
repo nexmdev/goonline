@@ -22,6 +22,7 @@ import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.adapters.ViewPagerAdapter;
 import com.nexm.ghatanjionline.models.Delivery;
 import com.nexm.ghatanjionline.models.OldItem;
+import com.nexm.ghatanjionline.models.ProductListing;
 import com.nexm.ghatanjionline.models.Provider;
 import com.nexm.ghatanjionline.util.SetViewPager;
 
@@ -117,7 +118,7 @@ public class OldShopDetail extends Fragment implements
 
         if(oldItem != null && delivery != null && provider != null){
             price.setText(oldItem.oldItemPRICE);
-            String deliveryCharge = delivery.deliveryDELIVERY_CHARGES == 0 ? "(Free Delivery)" :
+          /*  String deliveryCharge = delivery.deliveryDELIVERY_CHARGES == 0 ? "(Free Delivery)" :
                                                                             ("Delivery Rs. "+String.valueOf(delivery.deliveryDELIVERY_CHARGES));
            // price.append(deliveryCharge);
             description.setText(oldItem.oldItemDESCRIPTION);
@@ -136,7 +137,7 @@ public class OldShopDetail extends Fragment implements
             deliveryText.append("- ");
             deliveryText.append(deliveryCharge);
             String codAvailable = delivery.deliveryCOD_AVAILABLE ? "COD उपलब्ध":"COD उपलब्ध नाही.";
-            cod.setText(codAvailable);
+            cod.setText(codAvailable);*/
         }
     }
 
@@ -193,7 +194,7 @@ public class OldShopDetail extends Fragment implements
     }
 
     @Override
-    public void onCommonDetailsClick(Uri uri) {
+    public void onCommonDetailsClick(ProductListing productListing, int position, String productID) {
 
     }
 

@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="विकत घ्या..."
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -48,7 +48,7 @@
         android:fontFamily="sans-serif"
         android:text="किराना , दुध-तुप-दहि , भाजीपाला-फळं , कपडे व इतर बरेच काही."
         android:textAlignment="textEnd"
-        android:textSize="36sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView43" />

@@ -6,10 +6,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -19,7 +21,9 @@ import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.ProductActivity;
 import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.adapters.DataHolder;
-import com.nexm.ghatanjionline.models.ListItem;
+import com.nexm.ghatanjionline.adapters.SubCategoryHorizontalHolder;
+import com.nexm.ghatanjionline.models.Category;
+import com.nexm.ghatanjionline.models.ProductListing;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,21 +34,22 @@ import com.nexm.ghatanjionline.models.ListItem;
 public class SubCategoryFragment extends Fragment {
 
     private OnSubCategorySelected mListener;
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView,horizontalRecyclerView;
     //private RecyclerListAdapter listAdapter;
-    private FirebaseRecyclerAdapter mFirebaseAdapter;
+    private FirebaseRecyclerAdapter mFirebaseAdapter,horizontalAdapter;
    // private ArrayList<subCategoryData> data = new ArrayList<>();
-    private String category,subCategory;
+    private String category, department;
+    private TextView topAll;
 
     public SubCategoryFragment() {
         // Required empty public constructor
     }
-    public static SubCategoryFragment newInstance(String category,String subCategory){
+    public static SubCategoryFragment newInstance(String department,String category){
 
         SubCategoryFragment fragment = new SubCategoryFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("SUB_CATEGORY",subCategory);
         bundle.putString("CATEGORY",category);
+        bundle.putString("DEPARTMENT",department);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -55,11 +60,16 @@ public class SubCategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sub_category, container, false);
+        topAll = view.findViewById(R.id.subCategory_top_all_textView);
         recyclerView = (RecyclerView)view.findViewById(R.id.subCategory_recyclerView);
+        horizontalRecyclerView = (RecyclerView)view.findViewById(R.id.sub_category_horizontal_recyclerView);
        // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
        // recyclerView.setLayoutManager(linearLayoutManager);
        // recyclerView.setAdapter(listAdapter);
-        getActivity().setTitle(subCategory);
+        getActivity().setTitle(department);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false);
+        horizontalRecyclerView.setLayoutManager(linearLayoutManager);
+        horizontalRecyclerView.setAdapter(horizontalAdapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(mFirebaseAdapter);
@@ -80,16 +90,16 @@ public class SubCategoryFragment extends Fragment {
         super.onAttach(context);
 
         category = getArguments().getString("CATEGORY");
-        subCategory = getArguments().getString("SUB_CATEGORY");
-
+        department = getArguments().getString("DEPARTMENT");
+        setHorizontalRecyclerView();
 
         final Query query = GOApplication.database.getReference()
-                .child("ListItems").child(category).child(subCategory);
+                .child("ProductListings").orderByChild("deptCat").equalTo(department+","+category);
 
-        FirebaseRecyclerOptions<ListItem> options =  new FirebaseRecyclerOptions.Builder<ListItem>()
-                .setQuery(query, ListItem.class)
+        FirebaseRecyclerOptions<ProductListing> options =  new FirebaseRecyclerOptions.Builder<ProductListing>()
+                .setQuery(query, ProductListing.class)
                 .build();
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<ListItem,DataHolder>(
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<ProductListing,DataHolder>(
              options
         ) {
             @NonNull
@@ -101,7 +111,7 @@ public class SubCategoryFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(DataHolder viewHolder,final int position, final ListItem model) {
+            protected void onBindViewHolder(DataHolder viewHolder,final int position, final ProductListing model) {
 
                 viewHolder.bindData(model,getActivity(),true);
                 viewHolder.setOnItemClickListener(new DataHolder.OnItemClickListener() {
@@ -109,10 +119,12 @@ public class SubCategoryFragment extends Fragment {
                     public void onItemClick(View itemView,int currentposition) {
 
                         if (mListener != null) {
-                            ListItem data = (ListItem) mFirebaseAdapter.getItem(currentposition);
+                            ProductListing data = (ProductListing) mFirebaseAdapter.getItem(currentposition);
+
                            // mListener.onFragmentInteraction1(data.category,data.subCategory,
                            //         data.itemID,data.providerID,data.deliveryID);
-                            mListener.onFragmentInteraction1(data,currentposition);
+                            String key = mFirebaseAdapter.getRef(currentposition).getKey();
+                            mListener.onFragmentInteraction1(data,currentposition,mFirebaseAdapter.getRef(currentposition).getKey() );
                         }
                     }
                 });
@@ -139,6 +151,69 @@ public class SubCategoryFragment extends Fragment {
         }
     }
 
+    private void setHorizontalRecyclerView() {
+        final Query query = GOApplication.database.getReference()
+                .child(department).child("SubCategory").child(category);
+
+        FirebaseRecyclerOptions<Category> options =  new FirebaseRecyclerOptions.Builder<Category>()
+                .setQuery(query, Category.class)
+                .build();
+        horizontalAdapter = new FirebaseRecyclerAdapter<Category, SubCategoryHorizontalHolder>(
+                options
+        ) {
+            @NonNull
+            @Override
+            public SubCategoryHorizontalHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.sub_category_horizontal_recycler_item, parent, false);
+                return new SubCategoryHorizontalHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(SubCategoryHorizontalHolder viewHolder,final int position, final Category model) {
+
+                viewHolder.bindData(model,getActivity());
+                viewHolder.setOnItemClickListener(new SubCategoryHorizontalHolder.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View itemView,int currentposition) {
+
+                        if (mListener != null) {
+                            Category data = (Category) horizontalAdapter.getItem(currentposition);
+                            topAll.setTextColor(getActivity().getResources().getColor(R.color.colorPrimaryDark));
+                            refreshRecyclerView(data.getNAME());
+
+                        }
+                    }
+                });
+            }
+            @Override
+            public void onDataChanged() {
+                // Called each time there is a new data snapshot. You may want to use this method
+                // to hide a loading spinner or check for the "no documents" state and update your UI.
+                // ...
+            }
+
+            @Override
+            public void onError(DatabaseError e) {
+                // Called when there is an error getting data. You may want to update
+                // your UI to display an error message to the user.
+                // ...
+            }
+        };
+    }
+
+    private void refreshRecyclerView(String name) {
+        final Query query = GOApplication.database.getReference()
+                .child("ProductListings").orderByChild("deptCatSubCat").equalTo(department+","+category+","+name);
+
+        FirebaseRecyclerOptions<ProductListing> options =  new FirebaseRecyclerOptions.Builder<ProductListing>()
+                .setQuery(query, ProductListing.class)
+                .build();
+        mFirebaseAdapter.updateOptions(options);
+
+    }
+
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -150,11 +225,13 @@ public class SubCategoryFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mFirebaseAdapter.startListening();
+        horizontalAdapter.startListening();
     }
     @Override
     public void onStop() {
         super.onStop();
         mFirebaseAdapter.stopListening();
+        horizontalAdapter.stopListening();
     }
 
     /**
@@ -168,7 +245,7 @@ public class SubCategoryFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnSubCategorySelected {
-        void onFragmentInteraction1(ListItem data, int currentposition);
+        void onFragmentInteraction1(ProductListing data, int currentposition, String productID);
         // TODO: Update argument type and name
         //void onFragmentInteraction1(String category , String subCategory,
         //                            String itemID,String providerID,String deliveryID);

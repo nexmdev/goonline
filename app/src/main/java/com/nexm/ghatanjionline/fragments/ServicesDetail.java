@@ -20,6 +20,7 @@ import com.nexm.ghatanjionline.Constants.ConstantRef;
 import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.ProductActivity;
 import com.nexm.ghatanjionline.R;
+import com.nexm.ghatanjionline.models.ProductListing;
 import com.nexm.ghatanjionline.models.PropertyItem;
 import com.nexm.ghatanjionline.models.Provider;
 import com.nexm.ghatanjionline.models.ServicesItem;
@@ -117,7 +118,7 @@ public class ServicesDetail extends Fragment implements
     }
 
     @Override
-    public void onCommonDetailsClick(Uri uri) {
+    public void onCommonDetailsClick(ProductListing productListing, int position, String productID) {
 
     }
     @Override

@@ -14,7 +14,7 @@ public class GOApplication extends Application{
 
     public static FirebaseDatabase database;
     public static DatabaseReference databaseReference;
-    public static FirebaseAuth auth;
+   // public static FirebaseAuth auth;
 
     @Override
     public void onCreate(){
@@ -26,10 +26,10 @@ public class GOApplication extends Application{
         databaseReference = database.getReference();
         databaseReference.keepSynced(true);
 
-        auth = FirebaseAuth.getInstance();
+       /* auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser()==null){
             auth.signInAnonymously();
-        }
+        }*/
 
         super.onCreate();
 

@@ -29,7 +29,7 @@ import com.nexm.ghatanjionline.R;
 import com.nexm.ghatanjionline.adapters.BaseHolder;
 import com.nexm.ghatanjionline.adapters.DataHolder;
 import com.nexm.ghatanjionline.models.CommentData;
-import com.nexm.ghatanjionline.models.ListItem;
+import com.nexm.ghatanjionline.models.ProductListing;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -99,7 +99,7 @@ public class CommonDetailsFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onCommonDetailsClick(uri);
+           // mListener.onCommonDetailsClick(, uri, , );
         }
     }
 
@@ -118,24 +118,38 @@ public class CommonDetailsFragment extends Fragment {
         currentPosition = getArguments().getInt("POSITION");
 
         final Query query = GOApplication.database.getReference()
-                .child("ListItems")
-                .child(category).child(subCategory);
+                .child("ProductListings")
+                .orderByChild("deptCat")
+                .equalTo(subCategory);
 
-        FirebaseRecyclerOptions<ListItem> options =  new FirebaseRecyclerOptions.Builder<ListItem>()
-                .setQuery(query, ListItem.class)
+        FirebaseRecyclerOptions<ProductListing> options =  new FirebaseRecyclerOptions.Builder<ProductListing>()
+                .setQuery(query, ProductListing.class)
                 .build();
 
-        GOApplication.databaseReference= GOApplication.database.getReference()
-                .child("ListItems") .child(category).child(subCategory);
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<ListItem,BaseHolder>(
+
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<ProductListing,BaseHolder>(
                 options
         ) {
             @Override
-            protected void onBindViewHolder(BaseHolder viewHolder,int position, ListItem model) {
+            protected void onBindViewHolder(BaseHolder viewHolder,int position, ProductListing model) {
                 if(position==currentPosition){
                     viewHolder.bindData1();
                 }else {
                     ((DataHolder)viewHolder).bindData(model,getActivity(),true);
+                    ((DataHolder)viewHolder).setOnItemClickListener(new DataHolder.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View itemView,int currentposition) {
+
+                            if (mListener != null) {
+                                ProductListing data = (ProductListing) mFirebaseAdapter.getItem(currentposition);
+
+                                // mListener.onFragmentInteraction1(data.category,data.subCategory,
+                                //         data.itemID,data.providerID,data.deliveryID);
+                                String key = mFirebaseAdapter.getRef(currentposition).getKey();
+                                mListener.onCommonDetailsClick(data,currentposition,mFirebaseAdapter.getRef(currentposition).getKey() );
+                            }
+                        }
+                    });
                 }
             }
             @Override
@@ -212,7 +226,7 @@ public class CommonDetailsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onCommonDetailsClick(Uri uri);
+        void onCommonDetailsClick(ProductListing productListing, int position, String productID);
     }
     private void setComments(){
 
@@ -223,7 +237,7 @@ public class CommonDetailsFragment extends Fragment {
 
                 if(dataSnapshot != null && dataSnapshot.exists()){
                     for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                        final View Cview = getLayoutInflater(null).inflate(R.layout.comment_layout, null);
+                        final View Cview = getLayoutInflater().inflate(R.layout.comment_layout, null);
                         CommentData comment = dataSnapshot1.getValue(CommentData.class);
                         if (comment != null) {
 

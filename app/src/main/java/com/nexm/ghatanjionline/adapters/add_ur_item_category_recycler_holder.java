@@ -43,9 +43,9 @@ public class add_ur_item_category_recycler_holder extends RecyclerView.ViewHolde
     }
     public void bindData(Category category, Context mcontext){
 
-        categoryName.setText(category.categoryID);
+        categoryName.setText(category.getNAME());
         String note = "";
-        switch (category.categoryID){
+        switch (category.getNAME()){
             case ConstantRef.TRANSPORT:
                 note = "Select if you have a vehicle - car,cruiser,auto,pick up,407 etc to give on rent ";
                 break;

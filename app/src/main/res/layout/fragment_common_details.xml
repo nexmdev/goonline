@@ -6,9 +6,10 @@
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical">
 
 
         <TextView
@@ -23,8 +24,8 @@
             android:id="@+id/product_detail_reviews_container_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:orientation="vertical">
 
         </LinearLayout>
@@ -42,7 +43,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_detail_recycler_view_other_options"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" />
 
     </LinearLayout>
 

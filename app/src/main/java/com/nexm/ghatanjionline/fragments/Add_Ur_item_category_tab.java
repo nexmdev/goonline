@@ -67,7 +67,7 @@ public class Add_Ur_item_category_tab extends Fragment {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
 
                     Category categoryModel = snapshot.getValue(Category.class);
-                    categories.add(categoryModel.categoryID);
+                    categories.add(categoryModel.getNAME());
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner, categories);
                 arrayAdapter.setDropDownViewResource(R.layout.dropdown_layout);
@@ -151,7 +151,7 @@ public class Add_Ur_item_category_tab extends Fragment {
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Category subCategory = snapshot.getValue(Category.class);
-                    subCategories.add(subCategory.categoryID);
+                    subCategories.add(subCategory.getNAME());
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),R.layout.spinner, subCategories);
                 arrayAdapter.setDropDownViewResource(R.layout.dropdown_layout);

@@ -8,7 +8,7 @@ public class ConstantRef {
 
     public static final String ITEMS = "Items";
     public static final String PROVIDERS = "Providers";
-    public static final String DELIVERIES = "Deliveries";
+    public static final String DELIVERIES = "Delivery";
     public static final String DELIVERY_NOT_APPLICABLE = "XXXX";
     public static final String EXTRA_INFO = "ExtraInfo";
     public static final String LIST = "ListItems";
@@ -23,6 +23,6 @@ public class ConstantRef {
     public static final String TRANSPORT = "ट्रांसपोर्ट";
     public static final String SERVICES = "सर्विसेस";
     public static final String OLD_SHOP = "२ हॅंड शॉप";
-    public static final String FOOD = "फुड";
+    public static final String FOOD = "जेवण-नाश्ता-इत्यादी";
     public static final String NEWS = "न्युज";
 }

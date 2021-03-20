@@ -8,19 +8,31 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class Category {
 
-    public String categoryNAME;
-    public String categoryID;
-    public String categoryPHOTO;
+    private String NAME;
+    private String DESCRIPTION;
+    private String IMAGE_URL;
 
     public Category(){}
 
-    public void setCategoryNAME(String name){
-        this.categoryNAME = name;
+    public void setNAME(String name){
+        this.NAME = name;
     }
-    public void setCategoryID(String id){
-        this.categoryID = id;
+    public void setDESCRIPTION(String id){
+        this.DESCRIPTION = id;
     }
-    public void setCategoryPHOTO(String photo){
-        this.categoryPHOTO = photo;
+    public void setIMAGE_URL(String photo){
+        this.IMAGE_URL = photo;
+    }
+
+    public String getDESCRIPTION() {
+        return DESCRIPTION;
+    }
+
+    public String getIMAGE_URL() {
+        return IMAGE_URL;
+    }
+
+    public String getNAME() {
+        return NAME;
     }
 }

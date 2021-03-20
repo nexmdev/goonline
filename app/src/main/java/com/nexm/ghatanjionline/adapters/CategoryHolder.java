@@ -48,11 +48,11 @@ public class CategoryHolder extends RecyclerView.ViewHolder {
     }
     public void bindData(Category category, Context mcontext){
 
-        categoryName.setText(category.categoryID);
+        categoryName.setText(category.getNAME());
 
             Glide
                     .with(mcontext)
-                    .load(category.categoryPHOTO)
+                    .load(category.getIMAGE_URL())
                     .placeholder(R.drawable.placeholder)
                     //.crossFade()
                     .into(categoryImage);

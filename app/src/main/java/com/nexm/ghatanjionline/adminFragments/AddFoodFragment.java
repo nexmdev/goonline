@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.nexm.ghatanjionline.AddNewItemActivity;
 import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.R;
-import com.nexm.ghatanjionline.models.FoodItem;
+import com.nexm.ghatanjionline.models.ProductDetails;
 import com.nexm.ghatanjionline.models.OldItem;
 import com.nexm.ghatanjionline.models.PropertyItem;
 import com.nexm.ghatanjionline.models.ServicesItem;
@@ -147,12 +147,12 @@ public class AddFoodFragment extends Fragment {
 
                     case "Food":
 
-                        final FoodItem foodItem = new FoodItem();
-                        foodItem.foodItemNAME = e1Text;
-                        foodItem.foodItemPRICE = e2Text;
-                        foodItem.foodItemDESCRIPTION = e3Text;
-                        foodItem.foodItemID = reference.push().getKey();
-                        addToFirebase(foodItem.foodItemID,foodItem);
+                        final ProductDetails productDetails = new ProductDetails();
+                        productDetails.setFive(e1Text);
+                        productDetails.setPrices(e2Text);
+                        productDetails.setDiscription(e3Text);
+                        productDetails.setOne(reference.push().getKey());
+                        addToFirebase(productDetails.getFive(), productDetails);
                         break;
                     case "Transport":
                         final TransportItem transportItem = new TransportItem();
@@ -255,8 +255,8 @@ public class AddFoodFragment extends Fragment {
 
     private void addToList(String id,String name , String price){
 
-        AddNewItemActivity.listItem.itemID = id;
-        AddNewItemActivity.listItem.itemNAME = name;
+
+        AddNewItemActivity.productListing.setProductName(name);
        // AddNewItemActivity.listItem.itemPRICE =Float.parseFloat(price);
 
     }
