@@ -14,6 +14,7 @@ public class GOApplication extends Application{
 
     public static FirebaseDatabase database;
     public static DatabaseReference databaseReference;
+    public static String customerID,customerName;
    // public static FirebaseAuth auth;
 
     @Override
@@ -25,6 +26,8 @@ public class GOApplication extends Application{
         database.setPersistenceEnabled(true);
         databaseReference = database.getReference();
         databaseReference.keepSynced(true);
+        customerID="Guest";
+        customerName = "Guest";
 
        /* auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser()==null){

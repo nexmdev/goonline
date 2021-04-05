@@ -143,6 +143,7 @@ public class Main2Activity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             Intent intent = new Intent(this,Main3Activity.class);
+            intent.putExtra("CALLER","Sign_in");
             startActivity(intent);
 
             // Handle the camera action

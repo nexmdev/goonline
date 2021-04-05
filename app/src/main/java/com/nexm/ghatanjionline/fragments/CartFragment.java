@@ -381,6 +381,8 @@ public class CartFragment extends Fragment {
             order.setQuantity(cartItem.getQuantity());
             order.setDeliveryAddressID(deliveryAddressID);
             order.setSellertName(cartItem.getSellertName());
+            order.setCustomerNameAddress(GOApplication.customerName+"\n"+selectedAddress.getAddress1()+"\n"+
+                    selectedAddress.getAddress2()+"\n"+selectedAddress.getAddress3());
 
             Map updates = new HashMap();
             String orderPushKey = GOApplication.databaseReference.child("ORDERS").push().getKey();

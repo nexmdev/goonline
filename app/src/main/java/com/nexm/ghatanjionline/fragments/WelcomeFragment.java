@@ -34,6 +34,7 @@ import com.nexm.ghatanjionline.GOApplication;
 import com.nexm.ghatanjionline.Main2Activity;
 import com.nexm.ghatanjionline.Main3Activity;
 import com.nexm.ghatanjionline.R;
+import com.nexm.ghatanjionline.models.Customer;
 
 import java.util.HashMap;
 
@@ -133,9 +134,12 @@ public class WelcomeFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         progressBar.setVisibility(View.GONE);
                         if(snapshot.exists()){
+                            Customer customer = snapshot.getValue(Customer.class);
                             Toast.makeText(getActivity(),"Success fetching User Profile !",Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getActivity(), Main2Activity.class);
                             i.putExtra("CUSTOMER_UID",uid);
+                            GOApplication.customerID = uid;
+                            GOApplication.customerName=customer.getName()+" "+customer.getSurname();
                             startActivity(i);
                             getActivity().finish();
                         }else{

@@ -14,8 +14,17 @@ public class Order {
     private String customerID;
     private String deliveryAddressID;
     private String deliveryAgent;
+    private String customerNameAddress;
 
     public Order(){}
+
+    public String getCustomerNameAddress() {
+        return customerNameAddress;
+    }
+
+    public void setCustomerNameAddress(String customerNameAddress) {
+        this.customerNameAddress = customerNameAddress;
+    }
 
     public void setSellerId(String sellerId) {
         this.sellerId = sellerId;
