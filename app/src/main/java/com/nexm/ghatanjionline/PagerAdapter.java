@@ -1,8 +1,12 @@
 package com.nexm.ghatanjionline;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.lifecycle.Lifecycle;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.nexm.ghatanjionline.fragments.AllCategoriesFragment;
 import com.nexm.ghatanjionline.fragments.NewHomeFragment;
@@ -10,19 +14,25 @@ import com.nexm.ghatanjionline.fragments.NewHomeFragment;
 /**
  * Created by user on 22-03-2016.
  */
-class PagerAdapter extends FragmentStatePagerAdapter {
+class PagerAdapter extends FragmentStateAdapter {
 
 
-    private final String[] titless_array = {"होम","सर्व कॅटेगरीज"};
 
-    public PagerAdapter(FragmentManager fm) {
-        super(fm);
 
-    }
+ public PagerAdapter(@NonNull FragmentManager fm, @NonNull Lifecycle lifecycle){
+     super(fm,lifecycle);
+ }
 
+
+
+
+
+
+
+
+    @NonNull
     @Override
-    public Fragment getItem(int position) {
-
+    public Fragment createFragment(int position) {
         Fragment fragment = null;
         switch (position){
 
@@ -36,20 +46,11 @@ class PagerAdapter extends FragmentStatePagerAdapter {
                 break;
 
         }
-
-
         return fragment;
     }
 
     @Override
-    public int getCount() {
-       return titless_array.length;
-    }
-
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-
-        return titless_array[position];
+    public int getItemCount() {
+         return 2;
     }
 }

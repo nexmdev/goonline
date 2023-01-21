@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,7 +145,7 @@ public class OldShopDetail extends Fragment implements
 
     private void setViewPager(View view) {
 
-        ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager_procuct_detail);
+        ViewPager2 viewPager = (ViewPager2) view.findViewById(R.id.view_pager_procuct_detail);
         SetViewPager pager = new SetViewPager(view, viewPager);
         String[] urls = {oldItem.oldItemPHOTO1,oldItem.oldItemPHOTO2,
                 oldItem.oldItemPHOTO3};

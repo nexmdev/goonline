@@ -243,16 +243,16 @@ public class NewHomeFragment extends Fragment {
                         View userType3 = LayoutInflater.from(parent.getContext())
                                 .inflate(R.layout.home_r_category_grid_two, parent, false);
                         return new Home_Category_Grid_Holder(userType3);
-                    case ConstantRef.TYPE_FOUR:
+                    default:
                         View userType4 = LayoutInflater.from(parent.getContext())
                                 .inflate(R.layout.home_top_slide_item, parent, false);
                         return new HeaderHolder(userType4);
 
 
                 }
-                View userType4 = LayoutInflater.from(parent.getContext())
+                /*View userType4 = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.home_top_slide_item, parent, false);
-                return new HeaderHolder(userType4);
+                return new HeaderHolder(userType4);*/
             }
             @Override
             public int getItemViewType(int position){

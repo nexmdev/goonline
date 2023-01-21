@@ -17,14 +17,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.viewpager.widget.ViewPager
+            <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager_procuct_detail"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@android:color/white"
                 android:paddingTop="10dp">
 
-            </androidx.viewpager.widget.ViewPager>
+            </androidx.viewpager2.widget.ViewPager2>
 
             <LinearLayout
                 android:layout_width="match_parent"

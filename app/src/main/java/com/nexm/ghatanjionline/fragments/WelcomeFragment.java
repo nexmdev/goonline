@@ -122,6 +122,7 @@ public class WelcomeFragment extends Fragment {
         }else{
             progressBar.setVisibility(View.GONE);
             Intent intent = new Intent(getActivity(), Main3Activity.class);
+            intent.putExtra("CALLER","Welcome");
             getActivity().startActivity(intent);
         }
     }

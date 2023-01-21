@@ -15,4 +15,5 @@
     <color name="textwhite">#ffffff</color>
     <color name="blue">#2445FB</color>
     <color name="textGrey">#6f6f6f</color>
+    <color name="faint_blue">#2DA9FC</color>
 </resources>

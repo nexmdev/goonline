@@ -7,16 +7,16 @@
     android:orientation="vertical"
     android:paddingTop="10dp">
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/home_r_top_viewpager"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:background="@null"
         android:clipToPadding="false"
         android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingLeft="14dp"
-        android:paddingRight="10dp" />
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="10dp" />
 
 
     <LinearLayout

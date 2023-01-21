@@ -5,13 +5,15 @@ import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
-import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.navigation.NavigationView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -34,9 +37,8 @@ public class Main2Activity extends AppCompatActivity
 {
 
 
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
 
+    private final String[] titless_array = {"होम","सर्व कॅटेगरीज"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,10 @@ public class Main2Activity extends AppCompatActivity
       //  getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle("");
 
-
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.home_fragment_placeholder,new NewHomeFragment(),"Home")
+                .commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -59,11 +64,6 @@ public class Main2Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        viewPager = (ViewPager)findViewById(R.id.view_pager);
-        tabLayout = (TabLayout)findViewById(R.id.tab_layout);
-        final PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
 
     }
 
@@ -173,14 +173,7 @@ public class Main2Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public  void setCurrentTab(int position){
 
-        setTab(position);
-    }
-    private void setTab(int position){
-
-        viewPager.setCurrentItem(position,true);
-    }
 
 
 
@@ -206,7 +199,12 @@ public class Main2Activity extends AppCompatActivity
     public void onCategorySelected(String categoryName) {
 
         if(categoryName.matches("All")){
-            viewPager.setCurrentItem(1);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.home_fragment_placeholder,new AllCategoriesFragment())
+                    .addToBackStack("Home")
+                    .commit();
+
         }else{
             startProductActivity(categoryName,"x","x","x","All");
         }
@@ -303,9 +301,5 @@ public class Main2Activity extends AppCompatActivity
     public void onAllCategorySelected(String categoryName) {
         startProductActivity(categoryName,"x","x","x","All");
     }
-    @Override public void onPause(){
-        super.onPause();
-        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
-    }
 }

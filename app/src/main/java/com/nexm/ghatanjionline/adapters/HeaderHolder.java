@@ -3,6 +3,8 @@ package com.nexm.ghatanjionline.adapters;
 import android.content.Context;
 import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.view.View;
 
 import com.nexm.ghatanjionline.R;
@@ -14,7 +16,7 @@ import com.nexm.ghatanjionline.util.SetViewPager;
  */
 
 public class HeaderHolder extends BaseHolder {
-    private final ViewPager viewPager;
+    private final ViewPager2 viewPager;
     private SetViewPager setViewPager;
     private static HeaderHolder.OnItemClickListener listener;
     public interface OnItemClickListener {
@@ -27,7 +29,8 @@ public class HeaderHolder extends BaseHolder {
     public HeaderHolder(final View itemView) {
 
         super(itemView);
-        viewPager = (ViewPager) itemView.findViewById(R.id.home_r_top_viewpager);
+        viewPager = (ViewPager2) itemView.findViewById(R.id.home_r_top_viewpager);
+
         setViewPager = new SetViewPager(itemView,viewPager);
 
     }
@@ -35,6 +38,7 @@ public class HeaderHolder extends BaseHolder {
 
         String[] urls ={data.adType_url_1,data.selectedTag_url_2,data.listItemID_url_3};
         final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(mcontext,urls);
+
         viewPagerAdapter.setOnItemClickListener(new ViewPagerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {

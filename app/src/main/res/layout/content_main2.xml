@@ -15,26 +15,9 @@
     tools:context="com.nexm.ghatanjionline.Main2Activity"
     tools:showIn="@layout/app_bar_main2">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+    <FrameLayout
+        android:id="@+id/home_fragment_placeholder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimary"
-        android:elevation="2dp"
-        app:tabIndicatorColor="@color/orange"
-        app:tabIndicatorHeight="4dp"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="#444444"
-        app:tabTextAppearance="@style/text_button"
-        app:tabTextColor="@color/colorPrimaryDark" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tab_layout"
-        android:background="@null" />
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
